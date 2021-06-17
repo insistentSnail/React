@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React</title>
+  <style>
+    .text{
+      color:red;
+    }
+  </style>
+</head>
+<body>
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于支持react操作DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- 用于将jsx转为js -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    // const num = 456
+    // const VDOM = (
+    //   <h1 className="text" style={{background:"#0f0",fontSize:"50px"}}>{num}</h1>
+    // )
+    const arr = ['vue','react','angular']
+    const VDOM = (
+      <ul>
+        {
+          arr.map((ele,index)=>{
+            return  <li key={index}>{ele}</li>
+          })
+        }  
+      </ul>
+    )
+    // jsx {} 里面只支持函数表达式，即可以用值去接收的 例 const a=1  {a} a是有值的,不支持js语句, if, for 等等
+    ReactDOM.render(VDOM,document.querySelector("#test"))
+  </script>
+</body>
+</html>

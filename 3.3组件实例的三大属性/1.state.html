@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于支持react操作DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- 用于将jsx转为js -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    // let that 
+
+    class Child extends React.Component{
+      //调用一次
+      constructor(props){
+        // this指向实例对象
+        super(props)
+        this.state = {isHot:true,wind:'微风'}
+        this.nice = this.demo.bind(this) //自身的方法 nice去接收
+        // that = this
+      }
+      // 调用n+1次
+      render(){
+        // this指向实例对象
+        const {isHot} = this.state
+        console.log(this)
+        return <h1 id="title" onClick={this.nice}>今天天气很{this.state.isHot?'炎热':'凉爽'}.{this.state.wind}</h1>
+      }
+      // 调用n次，点几次调几次
+      demo(){
+        console.log(this)
+        // this指向不是实例对象，是window，但是类里面的方法默认局部开启严格模式，所以this为undefined
+        // this.state.isHot = !this.state.isHot //数据改了但是视图层没变
+
+        // 注意：状态不可直接更改  要借助内置的api去更改
+        this.setState({isHot : !this.state.isHot}) //更新的东西不是替换，是合并
+
+      }
+    }
+    ReactDOM.render(<Child/>,document.querySelector("#test"))
+
+    // const title = document.querySelector("#title")
+    // title.addEventListener("click",()=>{
+    //   alert("wow")
+    // })
+
+    // const title = document.querySelector("#title")
+    // title.onclick = ()=>{
+    //   alert("wow")
+    // }
+    // function demo(){
+    //   console.log('修改isHot的值',that)
+    //   that.state.isHot = !that.state.isHot
+    // }
+
+  </script>
+</body>
+</html>
