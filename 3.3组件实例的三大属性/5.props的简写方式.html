@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <div id="test3"></div>
+  <!-- 引入react核心库 全局多了React-->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于支持react操作DOM 全局多了ReactDOM-->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- 用于将jsx转为js -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- 引入prop-types,对props类型进行限制 全局多了PropTypes-->
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.js"></script> 
+  <script type="text/babel">
+    // props组件外部传进来的   state组件内部自己的数据  props是只读的，不能改
+    // class Student extends React.Component{
+    //   render(){
+    //     console.log(this)
+    //     const {name,age,sex} = this.props
+    //     return(
+    //       <ul>
+    //         <li>姓名：{this.props.name}</li>
+    //         <li>性别：{this.props.sex}</li>
+    //         <li>年龄：{this.props.age+1}</li>
+    //       </ul>
+    //     )
+    //   }
+    // }
+    // // props类型限制规则 外面小写，里面大写
+    // Student.propTypes = {
+    //   name:PropTypes.string.isRequired,//限制name必传，且为字符串
+    //   sex:PropTypes.string,
+    //   age:PropTypes.number,
+    //   speck:PropTypes.func
+    // }
+
+    // // 设置默认值
+    // Student.defaultProps = {
+    //   sex:"不男不女",
+    //   age:18
+    // }
+
+
+    class Student extends React.Component{
+      render(){
+        console.log(this)
+        const {name,age,sex} = this.props
+        return(
+          <ul>
+            <li>姓名：{this.props.name}</li>
+            <li>性别：{this.props.sex}</li>
+            <li>年龄：{this.props.age+1}</li>
+          </ul>
+        )
+      }
+      // 给类直接加东西 要加static  不加的话就是给实例对象上加东西了
+      static propTypes = {
+        name:PropTypes.string.isRequired,//限制name必传，且为字符串
+        sex:PropTypes.string,
+        age:PropTypes.number,
+        speck:PropTypes.func
+      }
+
+      // 设置默认值
+      static defaultProps = {
+        sex:"不男不女",
+        age:18
+      }
+
+    }
+
+
+    // ...不能展开一个对象 需要 let p = {...p}复制一个对象
+    const p = {name:"tom2",age:25,sex:"男"}
+    ReactDOM.render(<Student  name="tom" age={18} sex="女"/>,document.querySelector("#test1"))  //Number类型的18
+    ReactDOM.render(<Student {...p}/>,document.querySelector("#test2"))//react里面...p不是复制对象，是展开对象   批量传递props
+    ReactDOM.render(<Student name="tom3"/>,document.querySelector("#test3"))
+  </script>
+</body>
+</html>

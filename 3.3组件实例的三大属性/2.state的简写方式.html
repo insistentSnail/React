@@ -16,16 +16,24 @@
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
       class Child extends React.Component{
-        constructor(prop){
-          super(prop)
-          this.state = {isHot:false,wind:"狂风"}
-          this.changeWeather = this.changeWeather.bind(this)
-        }
+        // constructor(prop){
+        //   super(prop)
+        //   // this.state = {isHot:false,wind:"狂风"}
+        //   // this.changeWeather = this.changeWeather.bind(this)
+        // }
+        // 初始化状态
+        state =  {isHot:false,wind:"狂风"}
+        // 渲染组件
         render(){
           const {isHot,wind} = this.state
           return <h1 onClick={this.changeWeather}>今天天气很{isHot?'炎热':'凉爽'}，{wind}</h1>
         }
-        changeWeather(){
+        // changeWeather(){
+        //   const isHot = this.state.isHot
+        //   this.setState({isHot:!isHot})
+        // }
+        // 自定义方法  要用赋值语句的形式+箭头函数  这样方法就放在实例自身了
+        changeWeather = ()=>{
           const isHot = this.state.isHot
           this.setState({isHot:!isHot})
         }

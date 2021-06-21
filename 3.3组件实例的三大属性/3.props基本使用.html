@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <div id="test3"></div>
+  <!-- 引入react核心库 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于支持react操作DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- 用于将jsx转为js -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    // props组件外部传进来的   state组件内部自己的数据
+    class Student extends React.Component{
+      render(){
+        const {name,age,sex} = this.props
+        return(
+          <ul>
+            <li>姓名：{this.props.name}</li>
+            <li>性别：{this.props.sex}</li>
+            <li>年龄：{this.props.age+1}</li>
+          </ul>
+        )
+      }
+    }
+
+    // ...不能展开一个对象 需要 let p = {...p}复制一个对象
+    const p = {name:"lx",age:25,sex:"男"}
+    ReactDOM.render(<Student  name="tom" age={18} sex="女"/>,document.querySelector("#test1"))  //Number类型的18
+    ReactDOM.render(<Student {...p}/>,document.querySelector("#test2"))//react里面...p不是复制对象，是展开对象   批量传递props
+    ReactDOM.render(<Student/>,document.querySelector("#test3"))
+  </script>
+</body>
+</html>
