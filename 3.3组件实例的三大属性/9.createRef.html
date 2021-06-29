@@ -15,29 +15,25 @@
   <!-- 用于将jsx转为js -->
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
+    // 不要过度使用ref
     class Demo extends React.Component{
+      myRef = React.createRef() //创建容器 只能存一个
+      myRef2 = React.createRef() 
       render(){
         return(
           <div>
-            <input type="text" ref={this.change}/>
-            <input ref="input1" type="text" 
+            <input ref={this.myRef} type="text" 
             style={{marginRight:"10px"}} 
             placeholder = "点击按钮提示"/>
             <button style={{marginRight:"10px"}} onClick={this.showData}>点我显示数据</button>
-            <input ref="input2" onBlur={this.show} type="text" placeholder = "失去焦点提示"/>
           </div>
         )
       }
-      change = e=>{
-        this.input0 = e
-        console.log(this.input0,"input0")
-      }
+
       showData = ()=>{
-        alert(this.refs.input1.value)
+        alert(this.myRef.current.value);
       }
-      show = ()=>{
-        alert(this.refs.input2.value)
-      }
+
     }
    
     ReactDOM.render(<Demo/>,document.querySelector("#test"))
