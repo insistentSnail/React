@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React</title>
+</head>
+<body>
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于支持react操作DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- 用于将jsx转为js -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+//    {/*<input type="text">*/} 注释代码jsx
+    class Demo extends React.Component{
+      render(){
+        return(
+          <div>
+            {/*<input type="text">*/}
+            {/*啦啦啦*/}
+            <input ref={this.saveInput} type="text" 
+            style={{marginRight:"10px"}} 
+            placeholder = "点击按钮提示"/>
+            <input ref={a=>{this.input1 = a}} type="text" 
+            style={{marginRight:"10px"}} 
+            placeholder = "点击按钮提示"/>
+            <button style={{marginRight:"10px"}} onClick={this.showData}>点我显示数据</button>
+            <input ref="input2" onBlur={this.show} type="text" placeholder = "失去焦点提示"/>
+          </div>
+        )
+      }
+      saveInput= (a)=>{
+        this.input3 = a
+      }
+      showData = ()=>{
+        // alert(this.refs.input1.value)
+        console.log(this.input3.value)
+        alert(this.input1.value)
+      }
+      show = ()=>{
+        alert(this.refs.input2.value)
+      }
+    }
+   
+    ReactDOM.render(<Demo/>,document.querySelector("#test"))
+  </script>
+</body>
+</html>
