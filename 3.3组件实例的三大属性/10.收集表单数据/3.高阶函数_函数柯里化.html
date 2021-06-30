@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React</title>
+</head>
+<body>
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于支持react操作DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- 用于将jsx转为js -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    // 受控组件 类式vue的v-model 随着你的输入维护状态
+    class Login extends React.Component{
+      // 初始化状态
+      state = {
+        username:"", //用户名
+        password:"" //密码
+      }
+
+     render() {
+         return(
+            <form action="http://www.atguigu.com" onSubmit={this.submit}>
+                用户名：<input onChange={(e)=>{this.saveFormData('username',e.target.value)}} type="text" name="username"/>
+                密码：<input onChange={(e)=>{this.saveFormData('password',e.target.value)}} type="password" name="password"/>
+                {/*用户名：<input onChange={this.saveFormData('username')} type="text" name="username"/>
+                密码：<input onChange={this.saveFormData('password')} type="password" name="password"/>*/}
+                <button>登录</button>
+            </form>
+         )
+     }
+    //  函数柯里化  
+    // function sum(a){
+    //   return (b)=>{
+    //     return (c)=>{
+    //       return a+b+c
+    //     }
+    //   }
+    // }
+    // sum(a)(b)(c)
+
+  
+      // 使用函数柯里化
+    //  saveFormData = (dataType) => {
+    //    return (e)=>{
+    //     this.setState({[dataType]:e.target.value}) //对象取 key是变量的值 obj[key]
+    //    }
+    //  }
+
+    //  不使用函数柯里化
+    saveFormData = (dataType,value) => {
+        this.setState({[dataType]:value}) //对象取 key是变量的值 obj[key]
+     }
+
+    //  saveUsername = e=>{
+    //    this.setState({username:e.target.value})
+    //  }
+
+    //  savePas = e=>{
+    //   this.setState({password:e.target.value})
+    //  }
+
+     submit = (e)=>{
+        e.preventDefault();//阻止表单默认提交事件
+        const {username,password} = this.state
+        alert(`你的用户名是${username}、密码是${password}`)
+     }
+
+
+    }
+   
+    ReactDOM.render(<Login/>,document.querySelector("#test"))
+  </script>
+</body>
+</html>
