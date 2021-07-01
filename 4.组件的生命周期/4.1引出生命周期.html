@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于支持react操作DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- 用于将jsx转为js -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel"> 
+    class Life extends React.Component{
+
+      state = {
+        opacity:1
+      }
+      // 生命周期 组件挂载完毕
+      componentDidMount(){
+        console.log("componentDidMount")
+        this.timer = setInterval(()=>{
+          this.state.opacity -= 0.1
+          if(this.state.opacity<=0){
+            this.state.opacity=1
+          }
+          this.setState({opacity:this.state.opacity})
+        },200)
+      }
+      // 组件将要卸载时
+      componentWillUnmount(){
+        clearInterval(this.timer)
+      }
+
+
+      // timer = null
+      // render调用时机：  初始化渲染，每次状态更新之后
+      render(){
+        console.log("render")
+        // if(this.timer){
+          
+        // }else{
+        //   this.timer = setInterval(()=>{
+        //     this.state.opacity -= 0.1
+        //     if(this.state.opacity<=0){
+        //       this.state.opacity=1
+        //     }
+        //     this.setState({opacity:this.state.opacity})
+        //   },200)
+        // }
+        return(
+          <div>
+            <h1 style={{opacity:this.state.opacity}}>React学不会怎么办？</h1>
+            <button onClick={this.hide}>不活了</button>
+          </div>
+        )
+      }
+
+      hide = ()=>{
+        // clearInterval(this.timer)
+        ReactDOM.unmountComponentAtNode(document.querySelector("#test"))//卸载组件
+      }
+
+
+    }
+
+    ReactDOM.render(<Life/>,document.querySelector("#test"))
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="test"></div>
+  <!-- 引入react核心库 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <!-- 引入react-dom 用于支持react操作DOM -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- 用于将jsx转为js -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel"> 
+    class Sum extends React.Component{
+      // 第一
+      constructor(props){
+        console.log("Sum-constructor")
+        super(props)
+        this.state = {
+          count:0
+        }
+      }
+      // 第二
+      // 组件将要挂载 
+      componentWillMount(){
+        console.log("Sum-componentWillMount")
+      }
+      // 第四 
+      // 组件挂载完毕
+      componentDidMount(){
+        console.log("Sum-componentDidMount")
+      }
+
+      // 第三
+      render(){
+        console.log("Sum-render")
+        const {count} = this.state
+        return(
+          <div>
+            <h2>当前求和为：{count}</h2>
+            <button onClick={this.add}>点我+1</button>
+            <button onClick={this.death}>卸载组件</button>
+            <button onClick={this.update}>不更改任何状态中的数据,强制更新</button>
+          </div>
+        )
+      }
+      // 组件将要卸载
+      componentWillUnmount(){
+        console.log("Sum-componentWillUnmount")
+      }
+      // 组件是否要更新
+      shouldComponentUpdate(){
+        console.log("Sum-shouldComponentUpdate")
+        return true
+      }
+      // 将要更新 在render前
+      componentWillUpdate(){
+        console.log("Sum-componentWillUpdate")
+      }
+      // 更新完毕 在render后
+      componentDidUpdate(){
+        console.log("Sum-componentDidUpdate")
+      }
+
+      update = ()=>{
+        this.forceUpdate()
+      }
+
+      death = ()=>{
+        ReactDOM.unmountComponentAtNode(document.querySelector("#test"))
+      }
+
+      add = ()=>{
+        this.setState({count:this.state.count+1})
+      }
+
+    }
+
+    class A extends React.Component{
+      render(){
+        return(
+          <div></div>
+        )
+      }
+    }
+
+    class B extends React.Component{
+      render(){
+        return(
+          <div></div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Sum/>,document.querySelector("#test"))
+  </script>
+</body>
+</html>
