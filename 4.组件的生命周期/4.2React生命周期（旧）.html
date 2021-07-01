@@ -81,22 +81,57 @@
     }
 
     class A extends React.Component{
+
+      state = {carName:"奔驰"}
+
+      changeCar = ()=>{
+        this.setState({carName:"奥拓"})
+      }
+
       render(){
+        const {carName} = this.state
         return(
-          <div></div>
+          <div>
+            A是父组件
+            <button onClick={this.changeCar}>换车</button>
+            <B carName={carName}/>
+          </div>
         )
       }
     }
 
     class B extends React.Component{
+
+      
+      // 第一次接受props不调用
+      componentWillReceiveProps(){
+        console.log("B-componentWillReceiveProps")
+      }
+
+      // 组件是否要更新
+      shouldComponentUpdate(){
+        console.log("B-shouldComponentUpdate")
+        return true
+      }
+      // 将要更新 在render前
+      componentWillUpdate(){
+        console.log("B-componentWillUpdate")
+      }
+      // 更新完毕 在render后
+      componentDidUpdate(){
+        console.log("B-componentDidUpdate")
+      }
+
       render(){
+        console.log("B-render")
         return(
-          <div></div>
+          <div>B是子组件--车是{this.props.carName}</div>
         )
       }
     }
 
-    ReactDOM.render(<Sum/>,document.querySelector("#test"))
+    // ReactDOM.render(<Sum/>,document.querySelector("#test"))
+    ReactDOM.render(<A/>,document.querySelector("#test"))
   </script>
 </body>
 </html>
