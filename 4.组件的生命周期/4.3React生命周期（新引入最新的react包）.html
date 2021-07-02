@@ -8,7 +8,6 @@
 </head>
 <body>
   <div id="test"></div>
-  <!-- bootcdn 查看最新的cdn -->
   <!-- 引入react核心库 -->
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <!-- 引入react-dom 用于支持react操作DOM -->
@@ -16,10 +15,7 @@
   <!-- 用于将jsx转为js -->
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel"> 
-
-    // componentWillMount componentWillUpdate  componentWillReceiveProps 在新版里面都要加UNSAFE_前缀
-
-
+      // componentWillMount componentWillUpdate  componentWillReceiveProps 在新版里面都要加UNSAFE_前缀
     class Sum extends React.Component{
       // 第一
       constructor(props){
@@ -29,11 +25,14 @@
           count:0
         }
       }
-      // 第二
-      // 组件将要挂载 
-      componentWillMount(){
-        console.log("Sum-componentWillMount")
+      // 给类自身加方法   比较罕见，即state的值在任何时候都取决于props  了解即可
+      static getDerivedStateFromProps(props,state){
+        console.log("Sum-getDerivedStateFromProps",props,state)
+        // return props
+        return null
       }
+
+
       // 第四 
       // 组件挂载完毕  常用 一般在这个里面做一些初始化的事情，开启定时器，发送网络请求，订阅消息等等
       componentDidMount(){
@@ -62,13 +61,15 @@
         console.log("Sum-shouldComponentUpdate")
         return true
       }
-      // 将要更新 在render前
-      componentWillUpdate(){
-        console.log("Sum-componentWillUpdate")
+      // 在render后 componentDidUpdate之前  获取滚动的高度等等  使用概率极低
+      getSnapshotBeforeUpdate(){
+        console.log("Sum-getSnapshotBeforeUpdate")
+        return "aaaaaaaaaaaaaa"
       }
+
       // 更新完毕 在render后
-      componentDidUpdate(){
-        console.log("Sum-componentDidUpdate")
+      componentDidUpdate(preProps,preState,snapshot){
+        console.log("Sum-componentDidUpdate",preProps,preState,snapshot)//之前的props和state
       }
 
       update = ()=>{
@@ -85,58 +86,7 @@
 
     }
 
-    class A extends React.Component{
-
-      state = {carName:"奔驰"}
-
-      changeCar = ()=>{
-        this.setState({carName:"奥拓"})
-      }
-
-      render(){
-        const {carName} = this.state
-        return(
-          <div>
-            A是父组件
-            <button onClick={this.changeCar}>换车</button>
-            <B carName={carName}/>
-          </div>
-        )
-      }
-    }
-
-    class B extends React.Component{
-
-      
-      // 第一次接受props不调用
-      componentWillReceiveProps(){
-        console.log("B-componentWillReceiveProps")
-      }
-
-      // 组件是否要更新
-      shouldComponentUpdate(){
-        console.log("B-shouldComponentUpdate")
-        return true
-      }
-      // 将要更新 在render前
-      componentWillUpdate(){
-        console.log("B-componentWillUpdate")
-      }
-      // 更新完毕 在render后
-      componentDidUpdate(){
-        console.log("B-componentDidUpdate")
-      }
-
-      render(){
-        console.log("B-render")
-        return(
-          <div>B是子组件--车是{this.props.carName}</div>
-        )
-      }
-    }
-
-    // ReactDOM.render(<Sum/>,document.querySelector("#test"))
-    ReactDOM.render(<A/>,document.querySelector("#test"))
+    ReactDOM.render(<Sum count={199}/>,document.querySelector("#test"))
   </script>
 </body>
 </html>
