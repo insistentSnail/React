@@ -1,9 +1,10 @@
+// 引入react核心库
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-
+import reportWebVitals from './reportWebVitals';//性能测试
+//<React.StrictMode></React.StrictMode>  开启一些代码写的不规范的提示
 ReactDOM.render(
   <React.StrictMode>
     <App />
