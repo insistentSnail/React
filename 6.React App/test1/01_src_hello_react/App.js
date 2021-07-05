@@ -3,6 +3,9 @@
 //说明react里面分别用export 和 export default 暴露了组件才可以这样接收
 import React,{Component} from "react";
 import Helloo from "./component/Hello"
+import Welcome from "./component/Welcome"
+
+// 样式 类名相同会被覆盖,所以样式也需要模块化
 
 // function App() {
 //   return (
@@ -29,6 +32,7 @@ export default class App extends Component{
     return(
       <div>
         <Helloo/>
+        <Welcome/>
       </div>
     )
   }
