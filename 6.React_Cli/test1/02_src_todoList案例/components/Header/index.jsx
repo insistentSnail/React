@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import {nanoid} from "nanoid"
+import PropTypes from "prop-types"
 import "./index.css"
 // nanoid 生成独一无二的随机数 和uuid一样 但是包更小
 export default class Header extends Component {
+  // 对接收的props进行类型和必要性的限制
+  static propTypes = {
+    addTodo:PropTypes.func.isRequired
+  }
 
   render() {
     return (
