@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
+import axios from "axios"
 
 export default class Search extends Component {
 
   search = ()=>{
     const {keyWordElement:{value}} = this //连续解构赋值
     console.log(value)
+    // 发送请求
+    axios.get(`https://api.github.com/search/users?q=${value}`).then(
+      res => {console.log(res.data,"成功了")},
+      error =>{console.log(error,"失败了")}
+    )
+
     this.keyWordElement.value = ""
   }
 
