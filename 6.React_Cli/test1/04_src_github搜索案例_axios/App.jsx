@@ -5,11 +5,22 @@ import Search from "./components/Search"
 import List from "./components/List"
 export default class App extends Component {
 
+  state = {
+    users:[],
+    isFirst:true,//是否为第一次打开页面
+    isLoading:false,
+    err:''//存储请求相关的错误信息
+  }
+
+  updateAppState = (obj)=>{
+    this.setState(obj)
+  }
+
   render() {
     return (
         <div className="container">
-          <Search/>
-          <List/>
+          <Search updateAppState={this.updateAppState}/>
+          <List {...this.state}/>
         </div>
     )
   }
