@@ -28,7 +28,7 @@ export default class App extends Component {
                   {/* activeClassName="act" 可指定类名 */}
                   {/* 封装NavLink */}
                   {/* 组件中间的内容可以用props.children接收 */}
-                  <MyNavLink to="/about">About</MyNavLink>
+                  <MyNavLink to="/about" a={1}>About</MyNavLink>
                   <MyNavLink to="/home">Home</MyNavLink>
               </div>
             </div>
@@ -42,7 +42,7 @@ export default class App extends Component {
                     <Route path="/about" component={About}/>
                     <Route path="/home" component={Home}/>
                     {/* Redirect是重定向  哪个路由都匹配不上的时候就匹配它, 写在注册路由的最下方*/}
-                    <Redirect to="/about"></Redirect>
+                    <Redirect to="/home"></Redirect>
                   </Switch>
                 </div>
               </div>
