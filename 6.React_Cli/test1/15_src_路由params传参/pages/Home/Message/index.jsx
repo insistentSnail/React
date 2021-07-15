@@ -20,11 +20,7 @@ export default class Message extends Component {
             this.state.messageArr.map(ele=>{
               return (
                 <li key={ele.id}>
-                  {/* params传参 */}
-                  {/* <Link to={`/home/message/detail/${ele.id}/${ele.title}`}> {ele.title}</Link> */}
-
-                  {/* search传参 类似vue的query*/}
-                  <Link to={`/home/message/detail/?id=${ele.id}&title=${ele.title}`}> {ele.title}</Link>
+                  <Link to={`/home/message/detail/${ele.id}/${ele.title}`}> {ele.title}</Link>
                 </li>
               )
             })
@@ -32,10 +28,7 @@ export default class Message extends Component {
         </ul>
         <hr />
         {/* 声明接收params参数 */}
-        {/* <Route path="/home/message/detail/:id/:title" component={Detail}></Route> */}
-
-        {/* search参数无需声明接收 */}
-        <Route path="/home/message/detail" component={Detail}></Route>
+        <Route path="/home/message/detail/:id/:title" component={Detail}></Route>
       </div>
     )
   }
