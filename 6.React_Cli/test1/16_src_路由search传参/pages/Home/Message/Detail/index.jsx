@@ -15,12 +15,9 @@ export default class Detail extends Component {
     // const {id,title} = this.props.match.params
 
     // 接收search参数
-    // const {search} = this.props.location
-    // const result = qs.parse(search.slice(1))
-    // const {id,title} = result
-
-    // 接收state参数
-    const {id,title} = this.props.location.state
+    const {search} = this.props.location
+    const result = qs.parse(search.slice(1))
+    const {id,title} = result
 
     // const findResult = data.find(ele=>ele.id===id)
     return (

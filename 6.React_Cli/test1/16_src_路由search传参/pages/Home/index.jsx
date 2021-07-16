@@ -22,7 +22,7 @@ export default class Home extends Component {
             {/* 注册路由 路由的匹配都是按照路由注册顺序来的*/}
             <Route path="/home/news" component={News}/>
             <Route path="/home/message" component={Message}/>
-            {/* <Redirect to="/home/news"></Redirect> */}
+            <Redirect to="/home/news"></Redirect>
           </div>
         </div>
       </div>
