@@ -22,12 +22,12 @@ export default class Detail extends Component {
     // 接收state参数
     const {id,title} = this.props.location.state
 
-    const findResult = data.find(ele=>ele.id===id)||{}
+    // const findResult = data.find(ele=>ele.id===id)
     return (
       <ul>
         <li>ID:{id}</li>
         <li>TITLE:{title}</li>
-        <li>CONTENT:{findResult.content}</li>
+        <li>CONTENT:{data.find(ele=>{ return ele.id===id}).content}</li>
       </ul>
     )
   }
