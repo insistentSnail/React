@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
 
-import {createIncrementAction,createDecrementAction,createIncrementAsyncAction} from '../../redux/actions/count'
+import {createIncrementAction,createDecrementAction,createIncrementAsyncAction} from '../../redux/count_action'
 
 // mapStateToProps函数返回值返回{key：value}  state即store.getState()
 // const mapStateToProps = state =>({count:state})
