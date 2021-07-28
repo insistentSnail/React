@@ -65,7 +65,8 @@ class CountUI extends Component {
       // const {count} = this.state
       return (
           <div style={{paddingLeft:'10px'}}>
-              <h1>当前求和为：{this.props.count}</h1>
+              <h2>Count组件</h2>
+              <h4>当前求和为：{this.props.count}</h4>
               <select ref={c=>this.select = c}>
                 <option value="1">1</option>
                 <option value="2">2</option>
