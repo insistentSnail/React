@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
 
+import './index.css'
+
+const MyContext = React.createContext() //祖孙传值
+const {Consumer} = MyContext
 export default class A extends Component {
 
-  state = {username:"tom"}
+  state = {username:"tom",age:18}
 
   render() {
+    const {username,age} = this.state
     return (
-      <div>
+      <div className="parent">
         <h3>我是A组件</h3>
-        <h4>我的用户名是：{this.state.username}</h4>
-        <B name={this.state.username}/>
+        <h4>我的用户名是：{username}</h4>
+        <MyContext.Provider value={{username,age}}>
+          <B/>
+        </MyContext.Provider>
       </div>
     )
   }
@@ -18,24 +25,43 @@ export default class A extends Component {
 class B extends Component {
   render() {
     return (
-      <div>
+      <div className="child">
         <h3>我是B组件</h3>
-        <h4>我的用户名是：{this.props.name}</h4>
-        <C {...this.props}/>
+        <h4>我的用户名是：</h4>
+        <C/>
       </div>
     )
   }
 }
 
-class C extends Component {
-  render() {
-    return (
-      <div>
-        <h3>我是C组件</h3>
-        <h4>我的用户名是：{this.props.name}</h4>
-      </div>
-    )
-  }
+// class C extends Component {
+//   static contextType = MyContext
+//   render() {
+//     console.log(this.context)
+//     return (
+//       <div className="grand">
+//         <h3>我是C组件</h3>
+//         <h4>我的用户名是：{this.context.username}</h4>
+//       </div>
+//     )
+//   }
+// }
+
+function C(){
+  return (
+    <div className="grand">
+      <h3>我是C组件</h3>
+      <h4>我的用户名是：
+        <Consumer>
+          {
+            value=>{
+              return `${value.username},年龄${value.age}`
+            }
+          }
+        </Consumer>
+      </h4>
+    </div>
+  )
 }
 
 
