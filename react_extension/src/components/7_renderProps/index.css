@@ -1,0 +1,17 @@
+.parent{
+  width: 500px;
+  padding: 8px;
+  background-color: green;
+}
+.a{
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background-color: hotpink;
+}
+.b{
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background-color: antiquewhite;
+}
